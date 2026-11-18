@@ -1,0 +1,16 @@
+.day-round-head {
+  max-width: 760px;
+  margin: 58px 0 26px;
+}
+
+.day-round-head h3 {
+  margin: 4px 0 12px;
+  color: var(--navy);
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+.day-round-head > p:last-child {
+  margin: 0;
+  color: #566277;
+  line-height: 1.8;
+}
