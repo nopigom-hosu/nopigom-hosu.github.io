@@ -81,3 +81,26 @@ photoDialogClose?.addEventListener('click', () => photoDialog.close());
 photoDialog?.addEventListener('click', (event) => {
   if (event.target === photoDialog) photoDialog.close();
 });
+
+const blogPosts = document.querySelector('#blog-posts');
+if (blogPosts) {
+  fetch(`blog-posts.json?v=${Date.now()}`)
+    .then((response) => response.ok ? response.json() : Promise.reject())
+    .then((posts) => {
+      if (!Array.isArray(posts) || posts.length === 0) return;
+      blogPosts.replaceChildren(...posts.slice(0, 3).map((post) => {
+        const link = document.createElement('a');
+        link.className = 'blog-post';
+        link.href = post.link;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        const title = document.createElement('strong');
+        title.textContent = post.title;
+        const date = document.createElement('span');
+        date.textContent = post.date || '네이버 블로그';
+        link.append(title, date);
+        return link;
+      }));
+    })
+    .catch(() => {});
+}
